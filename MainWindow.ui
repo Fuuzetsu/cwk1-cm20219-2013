@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmMain</class>
+ <widget class="QWidget" name="frmMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>794</width>
+    <height>848</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>OpenGl - Qt -Direct Mode Drawing</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>180</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>161</width>
+        <height>177</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetNoConstraint</enum>
+       </property>
+       <item>
+        <widget class="QPushButton" name="newSquarePushButton">
+         <property name="text">
+          <string>New Square</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="newCirclePushButton">
+         <property name="text">
+          <string>New Circle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pressMePushButton">
+         <property name="text">
+          <string>Press Me</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="aboutPushButton">
+         <property name="text">
+          <string>About</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="quitPushButton">
+         <property name="text">
+          <string>Quit</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="GLWidget" name="widget" native="true"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GLWidget</class>
+   <extends>QWidget</extends>
+   <header>glwidget.h</header>
+   <container>1</container>
+   <slots>
+    <slot>newSquare()</slot>
+    <slot>newCircle()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pressMePushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>frmMain</receiver>
+   <slot>pressmebut()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>aboutPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>frmMain</receiver>
+   <slot>aboutBut()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>185</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quitPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>frmMain</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>133</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>193</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>newSquarePushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>newSquare()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>newCirclePushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>newCircle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>161</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>55</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>colourHex()</slot>
+  <slot>colourSnake()</slot>
+  <slot>showHex(bool)</slot>
+  <slot>showSnake(bool)</slot>
+  <slot>endit()</slot>
+  <slot>widthSlider(int)</slot>
+  <slot>panMode(bool)</slot>
+  <slot>openImage()</slot>
+  <slot>depthSet(int)</slot>
+  <slot>clear()</slot>
+  <slot>aboutBut()</slot>
+  <slot>helpBut()</slot>
+  <slot>txt0()</slot>
+  <slot>txt0(QString)</slot>
+  <slot>txt1()</slot>
+  <slot>txt1(QString)</slot>
+  <slot>pressmebut()</slot>
+  <slot>txt9(QString)</slot>
+  <slot>txt99()</slot>
+ </slots>
+</ui>
