@@ -3,6 +3,8 @@
 #include <QtOpenGL>
 #include "version.h"
 #include "window.h"
+#include <QRegExp>
+#include <QStringList>
 
 //------------------------------------------------------------------------------------
 // Creates and initializes the main window for application
@@ -20,4 +22,26 @@ void Window::aboutBut() {
   QString title = "QtOpenGl-2 ";
   QString mess = "QtOpenGl-basic by Brian Wyvill Release Version: " + QString::number(MY_VERSION);
   QMessageBox::information( this, title, mess, QMessageBox::Ok );
+}
+
+void Window::createPolygon() {
+  QString s = ui.polygonEdit->displayText();
+  QRegExp r("(\\d+\\s\\d+);+");
+  QStringList list;
+  int pos = 0;
+
+  while ((pos = r.indexIn(s, pos)) != -1) {
+    list << r.cap(1);
+    pos += r.matchedLength();
+  }
+
+  QPolygon p;
+
+  for (int i = 0; i < list.size(); ++i) {
+    QStringList l = list.at(i).split(" ");
+    p << QPoint(l.at(0).toInt(), l.at(1).toInt());
+  }
+
+  emit spawnPolygon(p);
+
 }

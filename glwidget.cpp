@@ -186,23 +186,9 @@ void GLWidget::newCircle() {
 
 
 
-void GLWidget::newPolygon() {
-  // int w = width() / 2, h = height() / 2;
-  int w = 0,  h = 0;
-  std::cout << "w: " << w << " h: " << h << std::endl;
-  // const QVector<QPoint> trianglePoints(QVector<QPoint>()
-  //                                      << QPoint(w, h)
-  //                                      << QPoint(w + 50, h + 50)
-  //                                      << QPoint(w + 50, h + 100));
+void GLWidget::newPolygon(QPolygon p) {
 
-  const QVector<QPoint> trianglePoints(QVector<QPoint>()
-                                       << QPoint(0, 0)
-                                       << QPoint(width() / 2, 0)
-                                       << QPoint(width() / 2, height())
-                                       << QPoint(0, height()));
-
-  shape_ptr defaultPolygon(new polygon(mShapeColour, mHighlightColour,
-                                       trianglePoints));
+  shape_ptr defaultPolygon(new polygon(mShapeColour, mHighlightColour, p));
 
   mShapes.push_back(defaultPolygon);
 

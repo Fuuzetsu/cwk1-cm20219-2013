@@ -58,7 +58,7 @@ class GLWidget : public QGLWidget {
   void clear();
   void newCircle();
   void newSquare();
-  void newPolygon();
+  void newPolygon(QPolygon p);
   void clearShapes();
 
  signals:

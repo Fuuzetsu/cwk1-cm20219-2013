@@ -28,9 +28,13 @@ class Window : public QDialog {
 
  private slots:
    void aboutBut();
+   void createPolygon();
 
  public slots:
    void updateMouseLabel(int x, int y);
+
+ signals:
+   void spawnPolygon(QPolygon p);
 
 };
 
