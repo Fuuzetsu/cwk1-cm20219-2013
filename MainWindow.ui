@@ -81,13 +81,6 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pressMePushButton">
-         <property name="text">
-          <string>Press Me</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="aboutPushButton">
          <property name="text">
           <string>About</string>
@@ -119,27 +112,13 @@
    <slots>
     <slot>newSquare()</slot>
     <slot>newCircle()</slot>
+    <slot>newPolygon()</slot>
+    <slot>clearShapes()</slot>
    </slots>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>pressMePushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>frmMain</receiver>
-   <slot>pressmebut()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>174</x>
-     <y>133</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>190</x>
-     <y>138</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>aboutPushButton</sender>
    <signal>clicked()</signal>

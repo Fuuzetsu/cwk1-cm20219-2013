@@ -29,7 +29,6 @@ private:
 
 private slots:
     void aboutBut();
-    void pressmebut();
 
 protected:
     // void  resizeEvent(QResizeEvent * );
