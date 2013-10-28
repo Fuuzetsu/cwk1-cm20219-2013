@@ -79,7 +79,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="polygonEdit"/>
+        <widget class="QLineEdit" name="polygonEdit">
+         <property name="text">
+          <string>0 0; 100 100; 100 200;</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_2">

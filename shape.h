@@ -2,6 +2,8 @@
 #define SHAPE_H_
 
 #include <QtOpenGL>
+#include <QStack>
+#include <QMatrix4x4>
 
 class shape {
 public:
@@ -36,6 +38,9 @@ private:
 
   QColor mNormalColour;
   QColor mSelectedColour;
+
+ protected:
+  QStack<QMatrix4x4> m_MatrixStack;
 };
 
 #endif

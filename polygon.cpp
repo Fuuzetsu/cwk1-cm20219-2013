@@ -8,14 +8,40 @@ polygon::polygon(const QColor &colour, const QColor &selectedColour,
   m_poly(vertices) {}
 
 void polygon::drawShape() {
+
   QPolygon::const_iterator i;
   for (i = m_poly.constBegin(); i != m_poly.constEnd(); ++i) {
-    glVertex2i(i->x(), i->y());
-    // std::cout << "Vertex: (" << i->x() << ", " << i->y() << ")" << std::endl;
+    QPointF pf(*i);
+
+    QStack<QMatrix4x4>::const_iterator j;
+    for (j = m_MatrixStack.constBegin(); j != m_MatrixStack.constEnd(); ++j) {
+      pf = (*j) * pf;
+    }
+
+    glVertex2f(pf.x(), pf.y());
   }
+
 }
 
 bool polygon::insideZeroCentredShape(int x, int y) {
+  /* We create a transformed polygon and check the point on that.
+   * While it's not the most efficient way (we could for example store the
+   * transformed shape when drawing, keeping track of the stack state), it
+   * shouldn't matter in this simple use-case.
+   */
+  QPolygon p;
+
+  QPolygon::const_iterator i;
+  for (i = m_poly.constBegin(); i != m_poly.constEnd(); ++i) {
+    QPointF pf(*i);
+
+    QStack<QMatrix4x4>::const_iterator j;
+    for (j = m_MatrixStack.constBegin(); j != m_MatrixStack.constEnd(); ++j) {
+      pf = (*j) * pf;
+    }
+
+    p << pf.toPoint();
+  }
   /* We have to flip y for the GL co-ordinates*/
-  return m_poly.containsPoint(QPoint(x, -y), Qt::OddEvenFill);
+  return p.containsPoint(QPoint(x, -y), Qt::OddEvenFill);
 }
