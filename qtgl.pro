@@ -13,11 +13,13 @@ HEADERS += glwidget.h \
     shape.h \
     square.h \
     version.h \
-    circle.h
+    circle.h \
+    polygon.h
 FORMS += MainWindow.ui
 SOURCES += glwidget.cpp \
     main.cpp \
     window.cpp \
     shape.cpp \
     square.cpp \
-    circle.cpp
+    circle.cpp \
+    polygon.cpp
