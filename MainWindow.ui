@@ -40,7 +40,7 @@
         <x>10</x>
         <y>10</y>
         <width>161</width>
-        <height>177</height>
+        <height>186</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -65,6 +65,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="newPolygonPushButton">
+         <property name="text">
+          <string>New Polygon</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -79,6 +86,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="clearCanvasButton">
+         <property name="text">
+          <string>Clear canvas</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="aboutPushButton">
@@ -180,6 +194,38 @@
     <hint type="destinationlabel">
      <x>229</x>
      <y>55</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>newPolygonPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>newPolygon()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>85</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>489</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearCanvasButton</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clearShapes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>489</x>
+     <y>423</y>
     </hint>
    </hints>
   </connection>

@@ -59,6 +59,8 @@ public slots:
     void clear();
     void newCircle();
     void newSquare();
+    void newPolygon();
+    void clearShapes();
 };
 
 

@@ -4,6 +4,9 @@
 #include "circle.h"
 #include "glwidget.h"
 #include "square.h"
+#include "polygon.h"
+
+#include <iostream>
 
 const double GLWidget::ZMin = -10.0;
 const double GLWidget::ZMax = 10.0;
@@ -33,6 +36,7 @@ void GLWidget::initializeGL()
 
 void GLWidget::paintGL()
 {
+  std::cout << "Window size: " << width() << "x" << height() << std::endl;
     //Clear target buffer and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -48,15 +52,22 @@ void GLWidget::paintGL()
 
     //Draw every shape
     //(This is what a foreach loop looks like in C++)
+
+    int x = 0;
     for(std::list<shape_ptr>::iterator it = mShapes.begin();
         it != mShapes.end();
         it++)
     {
-        shape_ptr currentShape(*it);
-        bool shapeSelected = (currentShape == mSelectedShape);
 
-        currentShape->draw(shapeSelected);
+
+      shape_ptr currentShape(*it);
+      bool shapeSelected = (currentShape == mSelectedShape);
+
+      currentShape->draw(shapeSelected);
+      ++x;
     }
+
+    std::cout << "Drawn " << x << " shapes." << std::endl;
 
 }
 
@@ -85,6 +96,7 @@ void GLWidget::mousePressEvent(QMouseEvent* event)
 
     if (button==Qt::LeftButton)
     {
+      std::cout << "Clicked on (" << mClickLocationX << ", " << mClickLocationY << ")" << std::endl;
         mClickLocationX = event->x();
         mClickLocationY = event->y();
 
@@ -184,4 +196,36 @@ void GLWidget::newCircle()
     mShapes.push_back(newCircle);
 
     updateGL();
+}
+
+
+
+void GLWidget::newPolygon() {
+  // int w = width() / 2, h = height() / 2;
+  int w = 0,  h = 0;
+  std::cout << "w: " << w << " h: " << h << std::endl;
+  // const QVector<QPoint> trianglePoints(QVector<QPoint>()
+  //                                      << QPoint(w, h)
+  //                                      << QPoint(w + 50, h + 50)
+  //                                      << QPoint(w + 50, h + 100));
+
+  const QVector<QPoint> trianglePoints(QVector<QPoint>()
+                                       << QPoint(0, 0)
+                                       << QPoint(width() / 2, 0)
+                                       << QPoint(width() / 2, height())
+                                       << QPoint(0, height()));
+
+  shape_ptr defaultPolygon(new polygon(mShapeColour, mHighlightColour,
+                                       trianglePoints));
+
+  mShapes.push_back(defaultPolygon);
+
+  updateGL();
+}
+
+void GLWidget::clearShapes() {
+  std::cout << "clearing canvas" << std::endl;
+  mSelectedShape.clear();
+  mShapes.clear();
+  updateGL();
 }
