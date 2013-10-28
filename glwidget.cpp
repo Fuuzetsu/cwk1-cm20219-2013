@@ -11,14 +11,12 @@
 const double GLWidget::ZMin = -10.0;
 const double GLWidget::ZMax = 10.0;
 
-GLWidget::GLWidget(QWidget *parent)
-    : QGLWidget(parent),
-      mClickLocationX(0),
-      mClickLocationY(0),
-      mShapeColour(255, 0, 0),
-      mHighlightColour(0, 0, 0)
-{
-}
+GLWidget::GLWidget(QWidget *parent) :
+  QGLWidget(parent),
+  mClickLocationX(0),
+  mClickLocationY(0),
+  mShapeColour(255, 0, 0),
+  mHighlightColour(0, 0, 0) {}
 
 void GLWidget::initializeGL()
 {
@@ -132,33 +130,37 @@ void GLWidget::mouseReleaseEvent(QMouseEvent* event)
     updateGL();
 }
 
-void GLWidget::mouseMoveEvent(QMouseEvent* event)
-{
-    //Return if no shape selected
-    if(mSelectedShape.isNull())
+void GLWidget::mouseMoveEvent(QMouseEvent* event) {
+
+  int mouseX = event->x();
+  int mouseY = event->y();
+
+  /* Update the label with mouse position */
+  //  Ui::frmMain::mousePositionLabel->setText(QString("Mouse position: (%1, %2)").arg(mouseX, mouseY));
+
+  //Return if no shape selected
+  if(mSelectedShape.isNull())
     {
-        return;
+      return;
     }
 
-    //Because multiple buttons might be selected we need to handle all buttons
-    Qt::MouseButtons buttons = event->buttons();
+  //Because multiple buttons might be selected we need to handle all buttons
+  Qt::MouseButtons buttons = event->buttons();
 
-    if(buttons & Qt::LeftButton)
+  if(buttons & Qt::LeftButton)
     {
-        //The user is dragging the left mouse button
-        int mouseX = event->x();
-        int mouseY = event->y();
+      //The user is dragging the left mouse button
 
-        //Move the shape (note that "y" is different between
-        //QT and openGL)
-        mSelectedShape->translateBy(mouseX - mClickLocationX,
-                                    mClickLocationY - mouseY);
+      //Move the shape (note that "y" is different between
+      //QT and openGL)
+      mSelectedShape->translateBy(mouseX - mClickLocationX,
+                                  mClickLocationY - mouseY);
 
-        //Update mouse click location
-        mClickLocationX = mouseX;
-        mClickLocationY = mouseY;
+      //Update mouse click location
+      mClickLocationX = mouseX;
+      mClickLocationY = mouseY;
 
-        updateGL();
+      updateGL();
     }
 }
 
