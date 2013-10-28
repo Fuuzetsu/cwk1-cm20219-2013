@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-polygon::polygon(const QColor& colour, const QColor& selectedColour,
+polygon::polygon(const QColor &colour, const QColor &selectedColour,
                  const QVector<QPoint> vertices) :
   shape(vertices.at(0).x(), vertices.at(0).y(), colour, selectedColour),
   m_poly(vertices) {}

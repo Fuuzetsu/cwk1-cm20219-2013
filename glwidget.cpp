@@ -18,8 +18,7 @@ GLWidget::GLWidget(QWidget *parent) :
   mShapeColour(255, 0, 0),
   mHighlightColour(0, 0, 0) {}
 
-void GLWidget::initializeGL()
-{
+void GLWidget::initializeGL() {
   //Set the background colour to white and default depth
   glClearColor(1.0, 1.0, 1.0, 1.0);
   glClearDepth(ZMax);
@@ -32,8 +31,7 @@ void GLWidget::initializeGL()
   glPointSize(5);
 }
 
-void GLWidget::paintGL()
-{
+void GLWidget::paintGL() {
   std::cout << "Window size: " << width() << "x" << height() << std::endl;
   //Clear target buffer and depth buffer
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -42,35 +40,32 @@ void GLWidget::paintGL()
   //First move the selected shape to last in the list
   //(The posh solution would be to allow the user to change the
   //order)
-  if(!mSelectedShape.isNull())
-    {
-      mShapes.remove(mSelectedShape);
-      mShapes.push_back(mSelectedShape);
-    }
+  if (!mSelectedShape.isNull()) {
+    mShapes.remove(mSelectedShape);
+    mShapes.push_back(mSelectedShape);
+  }
 
   //Draw every shape
   //(This is what a foreach loop looks like in C++)
 
   int x = 0;
-  for(std::list<shape_ptr>::iterator it = mShapes.begin();
-      it != mShapes.end();
-      it++)
-    {
+  for (std::list<shape_ptr>::iterator it = mShapes.begin();
+       it != mShapes.end();
+       it++) {
 
 
-      shape_ptr currentShape(*it);
-      bool shapeSelected = (currentShape == mSelectedShape);
+    shape_ptr currentShape(*it);
+    bool shapeSelected = (currentShape == mSelectedShape);
 
-      currentShape->draw(shapeSelected);
-      ++x;
-    }
+    currentShape->draw(shapeSelected);
+    ++x;
+  }
 
   std::cout << "Drawn " << x << " shapes." << std::endl;
 
 }
 
-void GLWidget::resizeGL(int width, int height)
-{
+void GLWidget::resizeGL(int width, int height) {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
@@ -87,50 +82,45 @@ void GLWidget::resizeGL(int width, int height)
   glMatrixMode(GL_MODELVIEW);
 }
 
-void GLWidget::mousePressEvent(QMouseEvent* event)
-{
+void GLWidget::mousePressEvent(QMouseEvent *event) {
 
   Qt::MouseButton button = event->button();
 
-  if (button==Qt::LeftButton)
-    {
-      std::cout << "Clicked on (" << mClickLocationX << ", " << mClickLocationY << ")" << std::endl;
-      mClickLocationX = event->x();
-      mClickLocationY = event->y();
+  if (button==Qt::LeftButton) {
+    std::cout << "Clicked on (" << mClickLocationX << ", " << mClickLocationY << ")" << std::endl;
+    mClickLocationX = event->x();
+    mClickLocationY = event->y();
 
-      //See if the user clicked on a shape
-      //(Shapes "on top" are last in the list so we iterate in reverse)
-      for(std::list<shape_ptr>::reverse_iterator it = mShapes.rbegin();
-          it != mShapes.rend();
-          ++it)
-        {
-          shape_ptr currentShape(*it);
+    //See if the user clicked on a shape
+    //(Shapes "on top" are last in the list so we iterate in reverse)
+    for (std::list<shape_ptr>::reverse_iterator it = mShapes.rbegin();
+         it != mShapes.rend();
+         ++it) {
+      shape_ptr currentShape(*it);
 
-          //Check if a shape has been clicked on
-          //(note that "y" is different between QT and openGL)
-          if(currentShape->inside(mClickLocationX, height()-mClickLocationY))
-            {
-              mSelectedShape = currentShape;
-              updateGL();
-              return;
-            }
-        }
-
-      //Nothing has been clicked on so deselect (set to null)
-      mSelectedShape.clear();
-      updateGL();
+      //Check if a shape has been clicked on
+      //(note that "y" is different between QT and openGL)
+      if (currentShape->inside(mClickLocationX, height()-mClickLocationY)) {
+        mSelectedShape = currentShape;
+        updateGL();
+        return;
+      }
     }
+
+    //Nothing has been clicked on so deselect (set to null)
+    mSelectedShape.clear();
+    updateGL();
+  }
 }
 
-void GLWidget::mouseReleaseEvent(QMouseEvent* event)
-{
+void GLWidget::mouseReleaseEvent(QMouseEvent *event) {
   //Tell C++ to shut up about event not being used
   (void)(event);
 
   updateGL();
 }
 
-void GLWidget::mouseMoveEvent(QMouseEvent* event) {
+void GLWidget::mouseMoveEvent(QMouseEvent *event) {
 
   int mouseX = event->x();
   int mouseY = event->y();
@@ -139,40 +129,36 @@ void GLWidget::mouseMoveEvent(QMouseEvent* event) {
   //  Ui::frmMain::mousePositionLabel->setText(QString("Mouse position: (%1, %2)").arg(mouseX, mouseY));
 
   //Return if no shape selected
-  if(mSelectedShape.isNull())
-    {
-      return;
-    }
+  if (mSelectedShape.isNull()) {
+    return;
+  }
 
   //Because multiple buttons might be selected we need to handle all buttons
   Qt::MouseButtons buttons = event->buttons();
 
-  if(buttons & Qt::LeftButton)
-    {
-      //The user is dragging the left mouse button
+  if (buttons & Qt::LeftButton) {
+    //The user is dragging the left mouse button
 
-      //Move the shape (note that "y" is different between
-      //QT and openGL)
-      mSelectedShape->translateBy(mouseX - mClickLocationX,
-                                  mClickLocationY - mouseY);
+    //Move the shape (note that "y" is different between
+    //QT and openGL)
+    mSelectedShape->translateBy(mouseX - mClickLocationX,
+                                mClickLocationY - mouseY);
 
-      //Update mouse click location
-      mClickLocationX = mouseX;
-      mClickLocationY = mouseY;
+    //Update mouse click location
+    mClickLocationX = mouseX;
+    mClickLocationY = mouseY;
 
-      updateGL();
-    }
+    updateGL();
+  }
 }
 
-void GLWidget::clear()
-{
+void GLWidget::clear() {
   mShapes.clear();
 
   updateGL();
 }
 
-void GLWidget::newSquare()
-{
+void GLWidget::newSquare() {
   const int defaultSquareSize = 100;
 
   //Create a new square and make it a QSharedPointer
@@ -186,8 +172,7 @@ void GLWidget::newSquare()
 }
 
 
-void GLWidget::newCircle()
-{
+void GLWidget::newCircle() {
   const int defaultRadius = 100;
 
   //Create a new circle and make it a QSharedPointer

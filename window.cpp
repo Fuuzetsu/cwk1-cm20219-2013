@@ -7,8 +7,7 @@
 //------------------------------------------------------------------------------------
 // Creates and initializes the main window for application
 //------------------------------------------------------------------------------------
-Window::Window(QWidget *parent):QDialog(parent)
-{
+Window::Window(QWidget *parent):QDialog(parent) {
   //Setup application interface. Creates all the required components and sliders.
   setupUi(this);
 
@@ -19,9 +18,8 @@ Window::Window(QWidget *parent):QDialog(parent)
 
 
 
-void Window::aboutBut()
-{
-    QString title="QtOpenGl-2 ";
-    QString mess = "QtOpenGl-basic by Brian Wyvill Release Version: " + QString::number(MY_VERSION);
-    QMessageBox::information( this, title, mess, QMessageBox::Ok );
+void Window::aboutBut() {
+  QString title="QtOpenGl-2 ";
+  QString mess = "QtOpenGl-basic by Brian Wyvill Release Version: " + QString::number(MY_VERSION);
+  QMessageBox::information( this, title, mess, QMessageBox::Ok );
 }

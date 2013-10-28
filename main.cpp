@@ -2,15 +2,14 @@
 #include "window.h"
 
 //Main is needed in all win32 applications
-int main(int argc, char* argv[])
-{
-    QApplication app(argc, argv);
+int main(int argc, char *argv[]) {
+  QApplication app(argc, argv);
 
-    Window appWindow;
+  Window appWindow;
 
-    appWindow.show();
+  appWindow.show();
 
-    app.exec();
+  app.exec();
 
-    return 0;
+  return 0;
 }
