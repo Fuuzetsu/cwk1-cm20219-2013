@@ -16,8 +16,6 @@ void polygon::drawShape() {
 }
 
 bool polygon::insideZeroCentredShape(int x, int y) {
-  int actX = x, actY = -y;
-  bool c = m_poly.containsPoint(QPoint(x, y), Qt::OddEvenFill);
-  std::cout << "Checking if poly contains (" << x << ", " << actY << "): " << c << std::endl;
-  return c;
+  /* We have to flip y for the GL co-ordinates*/
+  return m_poly.containsPoint(QPoint(x, -y), Qt::OddEvenFill);
 }
