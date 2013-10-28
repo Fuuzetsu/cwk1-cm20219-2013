@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>frmMain</class>
- <widget class="QWidget" name="frmMain">
+ <class>mainForm</class>
+ <widget class="QWidget" name="mainForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -151,6 +151,7 @@
    <header>glwidget.h</header>
    <container>1</container>
    <slots>
+    <signal>mouseMoved(int,int)</signal>
     <slot>newSquare()</slot>
     <slot>newCircle()</slot>
     <slot>newPolygon()</slot>
@@ -163,7 +164,7 @@
   <connection>
    <sender>aboutPushButton</sender>
    <signal>clicked()</signal>
-   <receiver>frmMain</receiver>
+   <receiver>mainForm</receiver>
    <slot>aboutBut()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -179,7 +180,7 @@
   <connection>
    <sender>quitPushButton</sender>
    <signal>clicked()</signal>
-   <receiver>frmMain</receiver>
+   <receiver>mainForm</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -256,6 +257,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>drawingCanvas</sender>
+   <signal>mouseMoved(int,int)</signal>
+   <receiver>mainForm</receiver>
+   <slot>updateMouseLabel(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>489</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>colourHex()</slot>
@@ -277,5 +294,6 @@
   <slot>pressmebut()</slot>
   <slot>txt9(QString)</slot>
   <slot>txt99()</slot>
+  <slot>updateMouseLabel(int,int)</slot>
  </slots>
 </ui>

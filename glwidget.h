@@ -16,11 +16,11 @@ typedef QSharedPointer<shape> shape_ptr;
 class GLWidget : public QGLWidget {
   Q_OBJECT
 
-public:
+ public:
   //Constructor for GLWidget
   GLWidget(QWidget *parent = 0);
 
-protected:
+ protected:
   //This is called before the first call to paintGL() or resizeGL()
   virtual void initializeGL();
 
@@ -40,7 +40,7 @@ protected:
   void mouseMoveEvent(QMouseEvent *event);
   //  void wheelEvent(QWheelEvent *event);  // for zoom
 
-private:
+ private:
   std::list<shape_ptr> mShapes;
 
   shape_ptr mSelectedShape;
@@ -54,12 +54,15 @@ private:
   static const double ZMin;
   static const double ZMax;
 
-public slots:
+ public slots:
   void clear();
   void newCircle();
   void newSquare();
   void newPolygon();
   void clearShapes();
+
+ signals:
+  void mouseMoved(int x, int y);
 };
 
 

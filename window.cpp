@@ -7,19 +7,17 @@
 //------------------------------------------------------------------------------------
 // Creates and initializes the main window for application
 //------------------------------------------------------------------------------------
-Window::Window(QWidget *parent):QDialog(parent) {
-  //Setup application interface. Creates all the required components and sliders.
-  setupUi(this);
-
-  //We need to attach our m_glWidget to glWidgetArea
-  //All our drawings will be on glWidgetArea
-  //glWidgetArea->setWidget(&mGLWidget);
+Window::Window(QWidget *parent) :
+  QDialog(parent) {
+  ui.setupUi(this);
 }
 
-
+void Window::updateMouseLabel(int x, int y) {
+  ui.mousePositionLabel->setText(QString("Mouse: (%1, %2)").arg(x).arg(y));
+}
 
 void Window::aboutBut() {
-  QString title="QtOpenGl-2 ";
+  QString title = "QtOpenGl-2 ";
   QString mess = "QtOpenGl-basic by Brian Wyvill Release Version: " + QString::number(MY_VERSION);
   QMessageBox::information( this, title, mess, QMessageBox::Ok );
 }

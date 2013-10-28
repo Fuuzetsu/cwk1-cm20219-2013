@@ -7,6 +7,7 @@
 #include "polygon.h"
 
 #include <iostream>
+#include <stdlib.h>
 
 const double GLWidget::ZMin = -10.0;
 const double GLWidget::ZMax = 10.0;
@@ -32,7 +33,6 @@ void GLWidget::initializeGL() {
 }
 
 void GLWidget::paintGL() {
-  std::cout << "Window size: " << width() << "x" << height() << std::endl;
   //Clear target buffer and depth buffer
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
@@ -87,7 +87,6 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
   Qt::MouseButton button = event->button();
 
   if (button==Qt::LeftButton) {
-    std::cout << "Clicked on (" << mClickLocationX << ", " << mClickLocationY << ")" << std::endl;
     mClickLocationX = event->x();
     mClickLocationY = event->y();
 
@@ -125,8 +124,8 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event) {
   int mouseX = event->x();
   int mouseY = event->y();
 
-  /* Update the label with mouse position */
-  //  Ui::frmMain::mousePositionLabel->setText(QString("Mouse position: (%1, %2)").arg(mouseX, mouseY));
+  /* Update the label with mouse position adjusted to widget co-ordinates */
+  emit mouseMoved(mouseX, abs(mouseY - height()));
 
   //Return if no shape selected
   if (mSelectedShape.isNull()) {
