@@ -22,6 +22,10 @@ void Window::updateMouseLabel(int x, int y) {
   }
 }
 
+void Window::updateShapeNumber(int n) {
+  ui.shapeNumberLabel->setText(QString("Have %1 shapes.").arg(n));
+}
+
 void Window::aboutBut() {
   QString title = "QtOpenGl-2 ";
   QString mess = "QtOpenGl-basic by Brian Wyvill Release Version: " + QString::number(MY_VERSION);
@@ -47,5 +51,4 @@ void Window::createPolygon() {
   }
 
   emit spawnPolygon(p);
-
 }

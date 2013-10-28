@@ -63,6 +63,7 @@ class GLWidget : public QGLWidget {
 
  signals:
   void mouseMoved(int x, int y);
+  void shapesDrawn(int n);
 };
 
 

@@ -135,6 +135,13 @@
         </spacer>
        </item>
        <item>
+        <widget class="QLabel" name="shapeNumberLabel">
+         <property name="text">
+          <string>Have 0 shapes.</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="mousePositionLabel">
          <property name="text">
           <string>Mouse out of canvas</string>
@@ -155,6 +162,7 @@
    <container>1</container>
    <slots>
     <signal>mouseMoved(int,int)</signal>
+    <signal>shapesDrawn(int)</signal>
     <slot>newSquare()</slot>
     <slot>newCircle()</slot>
     <slot>newPolygon(QPolygon)</slot>
@@ -292,6 +300,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>drawingCanvas</sender>
+   <signal>shapesDrawn(int)</signal>
+   <receiver>mainForm</receiver>
+   <slot>updateShapeNumber(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>489</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>spawnPolygon(QPolygon)</signal>
@@ -316,5 +340,6 @@
   <slot>txt99()</slot>
   <slot>updateMouseLabel(int,int)</slot>
   <slot>createPolygon()</slot>
+  <slot>updateShapeNumber(int)</slot>
  </slots>
 </ui>

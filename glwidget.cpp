@@ -61,7 +61,7 @@ void GLWidget::paintGL() {
     ++x;
   }
 
-  std::cout << "Drawn " << x << " shapes." << std::endl;
+  emit shapesDrawn(x);
 
 }
 
@@ -196,7 +196,6 @@ void GLWidget::newPolygon(QPolygon p) {
 }
 
 void GLWidget::clearShapes() {
-  std::cout << "clearing canvas" << std::endl;
   mSelectedShape.clear();
   mShapes.clear();
   updateGL();
