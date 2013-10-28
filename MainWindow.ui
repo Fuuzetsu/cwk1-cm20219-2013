@@ -14,6 +14,13 @@
    <string>OpenGl - Qt -Direct Mode Drawing</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1">
+    <widget class="GLWidget" name="drawingCanvas" native="true">
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="sizePolicy">
@@ -40,7 +47,7 @@
         <x>10</x>
         <y>10</y>
         <width>161</width>
-        <height>186</height>
+        <height>386</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -108,12 +115,32 @@
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>200</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="mousePositionLabel">
+         <property name="text">
+          <string>Mouse out of canvas</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="GLWidget" name="widget" native="true"/>
    </item>
   </layout>
  </widget>
@@ -168,7 +195,7 @@
   <connection>
    <sender>newSquarePushButton</sender>
    <signal>clicked()</signal>
-   <receiver>widget</receiver>
+   <receiver>drawingCanvas</receiver>
    <slot>newSquare()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -184,7 +211,7 @@
   <connection>
    <sender>newCirclePushButton</sender>
    <signal>clicked()</signal>
-   <receiver>widget</receiver>
+   <receiver>drawingCanvas</receiver>
    <slot>newCircle()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -200,7 +227,7 @@
   <connection>
    <sender>newPolygonPushButton</sender>
    <signal>clicked()</signal>
-   <receiver>widget</receiver>
+   <receiver>drawingCanvas</receiver>
    <slot>newPolygon()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -216,7 +243,7 @@
   <connection>
    <sender>clearCanvasButton</sender>
    <signal>clicked()</signal>
-   <receiver>widget</receiver>
+   <receiver>drawingCanvas</receiver>
    <slot>clearShapes()</slot>
    <hints>
     <hint type="sourcelabel">
