@@ -56,9 +56,6 @@ void GLWidget::paintGL() {
 
     shape_ptr currentShape(*it);
     bool shapeSel = (currentShape == mSelectedShape);
-    if (shapeSel) {
-      emit shapeSelected(mSelectedShape.data());
-    }
     currentShape->draw(shapeSel);
     ++x;
   }
@@ -103,6 +100,9 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
       //(note that "y" is different between QT and openGL)
       if (currentShape->inside(mClickLocationX, height()-mClickLocationY)) {
         mSelectedShape = currentShape;
+
+        emit shapeSelected(mSelectedShape.data());
+
         updateGL();
         return;
       }

@@ -74,3 +74,7 @@ void Window::populateMatrixList(shape *s) {
   std::cout << "Received a shape with " << s->getMatrixStack().size()
             << " matrices on the stack." << std::endl;
 }
+
+void Window::clearMatrixList() {
+  ui.matrixList->clear();
+}

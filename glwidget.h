@@ -65,6 +65,7 @@ class GLWidget : public QGLWidget {
   void mouseMoved(int x, int y);
   void shapesDrawn(int n);
   void shapeSelected(shape *s);
+  void shapeDeselected();
 };
 
 

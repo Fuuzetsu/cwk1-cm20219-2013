@@ -38,6 +38,7 @@ class Window : public QDialog {
    void disableAddButton();
    void enableAddButton();
    void populateMatrixList(shape *s);
+   void clearMatrixList();
 
  signals:
    void spawnPolygon(QPolygon p);
