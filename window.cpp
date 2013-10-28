@@ -15,7 +15,11 @@ Window::Window(QWidget *parent) :
 }
 
 void Window::updateMouseLabel(int x, int y) {
-  ui.mousePositionLabel->setText(QString("Mouse: (%1, %2)").arg(x).arg(y));
+  if (x < 0 || y < 0) {
+    ui.mousePositionLabel->setText(QString("Mouse out of canvas"));
+  } else {
+    ui.mousePositionLabel->setText(QString("Mouse: (%1, %2)").arg(x).arg(y));
+  }
 }
 
 void Window::aboutBut() {
