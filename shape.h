@@ -24,6 +24,14 @@ public:
   //This is a public method called to check if the co-ordinates are inside the shape
   bool inside(int x, int y);
 
+  QStack<QMatrix4x4> getMatrixStack() {
+    return m_MatrixStack;
+  }
+
+  void setMatrixStack(QStack<QMatrix4x4> ms) {
+    m_MatrixStack = ms;
+  }
+
 private:
   //This is a pure virtual function (indicated by = 0), which is defined by the
   //derived classes, e.g. square. The drawn shape should be centred on (0, 0)

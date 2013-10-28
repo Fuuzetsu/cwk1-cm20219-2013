@@ -55,9 +55,11 @@ void GLWidget::paintGL() {
 
 
     shape_ptr currentShape(*it);
-    bool shapeSelected = (currentShape == mSelectedShape);
-
-    currentShape->draw(shapeSelected);
+    bool shapeSel = (currentShape == mSelectedShape);
+    if (shapeSel) {
+      emit shapeSelected(mSelectedShape.data());
+    }
+    currentShape->draw(shapeSel);
     ++x;
   }
 

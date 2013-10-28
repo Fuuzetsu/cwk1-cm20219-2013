@@ -52,3 +52,25 @@ void Window::createPolygon() {
 
   emit spawnPolygon(p);
 }
+
+void Window::disableDeleteButton() {
+  ui.deleteMatrixButton->setEnabled(false);
+}
+
+void Window::enableDeleteButton() {
+  ui.deleteMatrixButton->setEnabled(true);
+}
+
+void Window::disableAddButton() {
+  ui.addMatrixButton->setEnabled(false);
+}
+
+void Window::enableAddButton() {
+  ui.addMatrixButton->setEnabled(true);
+}
+
+void Window::populateMatrixList(shape *s) {
+
+  std::cout << "Received a shape with " << s->getMatrixStack().size()
+            << " matrices on the stack." << std::endl;
+}

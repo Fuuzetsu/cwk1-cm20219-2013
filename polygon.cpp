@@ -5,7 +5,12 @@
 polygon::polygon(const QColor &colour, const QColor &selectedColour,
                  const QVector<QPoint> vertices) :
   shape(vertices.at(0).x(), vertices.at(0).y(), colour, selectedColour),
-  m_poly(vertices) {}
+  m_poly(vertices) {
+  m_MatrixStack.push(QMatrix4x4(3.0, 0.0, 0.0, 0.0,
+                                0.0, 3.0, 0.0, 0.0,
+                                0.0, 0.0, 3.0, 0.0,
+                                0.0, 0.0, 0.0, 1.0));
+  }
 
 void polygon::drawShape() {
 

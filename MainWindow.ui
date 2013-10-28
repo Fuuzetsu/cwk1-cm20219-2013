@@ -24,7 +24,7 @@
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -46,8 +46,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>161</width>
-        <height>386</height>
+        <width>164</width>
+        <height>811</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -152,6 +152,53 @@
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>60</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Matrix stack</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="matrixList"/>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="newMatrixEdit"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="addMatrixButton">
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="deleteMatrixButton">
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -167,6 +214,7 @@
    <slots>
     <signal>mouseMoved(int,int)</signal>
     <signal>shapesDrawn(int)</signal>
+    <signal>shapeSelected(shape*)</signal>
     <slot>newSquare()</slot>
     <slot>newCircle()</slot>
     <slot>newPolygon(QPolygon)</slot>
@@ -320,6 +368,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>matrixList</sender>
+   <signal>itemActivated(QListWidgetItem*)</signal>
+   <receiver>mainForm</receiver>
+   <slot>enableDeleteButton()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>100</x>
+     <y>668</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>drawingCanvas</sender>
+   <signal>shapeSelected(shape*)</signal>
+   <receiver>mainForm</receiver>
+   <slot>populateMatrixList(shape*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>489</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>spawnPolygon(QPolygon)</signal>
@@ -345,5 +425,10 @@
   <slot>updateMouseLabel(int,int)</slot>
   <slot>createPolygon()</slot>
   <slot>updateShapeNumber(int)</slot>
+  <slot>enableDeleteButton()</slot>
+  <slot>disableDeleteButton()</slot>
+  <slot>enableAddButton()</slot>
+  <slot>disableAddButton()</slot>
+  <slot>populateMatrixList(shape*)</slot>
  </slots>
 </ui>

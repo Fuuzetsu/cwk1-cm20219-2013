@@ -33,6 +33,11 @@ class Window : public QDialog {
  public slots:
    void updateMouseLabel(int x, int y);
    void updateShapeNumber(int n);
+   void disableDeleteButton();
+   void enableDeleteButton();
+   void disableAddButton();
+   void enableAddButton();
+   void populateMatrixList(shape *s);
 
  signals:
    void spawnPolygon(QPolygon p);
