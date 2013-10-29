@@ -110,6 +110,7 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
 
     //Nothing has been clicked on so deselect (set to null)
     mSelectedShape.clear();
+    emit shapeDeselected();
     updateGL();
   }
 }

@@ -70,9 +70,23 @@ void Window::enableAddButton() {
 }
 
 void Window::populateMatrixList(shape *s) {
+  /* Clear the list before populating it again */
+  ui.matrixList->clear();
 
-  std::cout << "Received a shape with " << s->getMatrixStack().size()
-            << " matrices on the stack." << std::endl;
+  QStack<QMatrix4x4> st = s->getMatrixStack();
+
+  QStack<QMatrix4x4>::const_iterator i;
+
+  for (i = st.constBegin(); i != st.constEnd(); ++i) {
+    QMatrix4x4 m = (*i);
+    QString str;
+    for (int r = 0; r < 4; ++r) {
+      QVector4D v = m.row(r);
+      str = str + QString("%1 %2 %3 %4; ").arg(v.x()).arg(v.y())
+        .arg(v.z()).arg(v.w());
+    }
+    ui.matrixList->addItem(str);
+  }
 }
 
 void Window::clearMatrixList() {
