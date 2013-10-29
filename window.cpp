@@ -87,8 +87,19 @@ void Window::populateMatrixList(shape *s) {
     }
     ui.matrixList->addItem(str);
   }
+  enableAddButton();
+  if (st.size() > 0) {
+    enableDeleteButton();
+  } else {
+    disableDeleteButton();
+  }
 }
 
 void Window::clearMatrixList() {
   ui.matrixList->clear();
+  /* Disable the buttons as well considering nothing is now selected.
+   * Perhaps a better name for this method is in order.
+   */
+  disableAddButton();
+  disableDeleteButton();
 }
