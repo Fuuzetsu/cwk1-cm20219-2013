@@ -60,10 +60,13 @@ class GLWidget : public QGLWidget {
   void newSquare();
   void newPolygon(QPolygon p);
   void clearShapes();
+  void redrawScene();
 
  signals:
   void mouseMoved(int x, int y);
   void shapesDrawn(int n);
+  void shapeSelected(shape *s);
+  void shapeDeselected();
 };
 
 

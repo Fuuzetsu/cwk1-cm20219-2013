@@ -55,9 +55,8 @@ void GLWidget::paintGL() {
 
 
     shape_ptr currentShape(*it);
-    bool shapeSelected = (currentShape == mSelectedShape);
-
-    currentShape->draw(shapeSelected);
+    bool shapeSel = (currentShape == mSelectedShape);
+    currentShape->draw(shapeSel);
     ++x;
   }
 
@@ -101,6 +100,9 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
       //(note that "y" is different between QT and openGL)
       if (currentShape->inside(mClickLocationX, height()-mClickLocationY)) {
         mSelectedShape = currentShape;
+
+        emit shapeSelected(mSelectedShape.data());
+
         updateGL();
         return;
       }
@@ -108,6 +110,7 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
 
     //Nothing has been clicked on so deselect (set to null)
     mSelectedShape.clear();
+    emit shapeDeselected();
     updateGL();
   }
 }
@@ -198,5 +201,9 @@ void GLWidget::newPolygon(QPolygon p) {
 void GLWidget::clearShapes() {
   mSelectedShape.clear();
   mShapes.clear();
+  updateGL();
+}
+
+void GLWidget::redrawScene() {
   updateGL();
 }

@@ -20,27 +20,6 @@ void shape::draw(bool selected) {
   //Translate the shape so that its centre is in the right location
   glTranslated(mXCentre, mYCentre, 0.0);
 
-  //This might be a good place to add other transformations
-  //(Here's an example, the identity matrix)
-  GLdouble matrix[4][4];
-  matrix[0][0] = 1;
-  matrix[0][1] = 0;
-  matrix[0][2] = 0;
-  matrix[0][3] = 0;
-  matrix[1][0] = 0;
-  matrix[1][1] = 1;
-  matrix[1][2] = 0;
-  matrix[1][3] = 0;
-  matrix[2][0] = 0;
-  matrix[2][1] = 0;
-  matrix[2][2] = 1;
-  matrix[2][3] = 0;
-  matrix[3][0] = 0;
-  matrix[3][1] = 0;
-  matrix[3][2] = 0;
-  matrix[3][3] = 1;
-  glMultMatrixd(&matrix[0][0]);
-
   //Set the colour
   glColor3f(mNormalColour.redF(), mNormalColour.greenF(), mNormalColour.blueF());
 
@@ -82,5 +61,3 @@ bool shape::inside(int x, int y) {
 
   return insideShape;
 }
-
-
