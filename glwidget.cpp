@@ -1,7 +1,6 @@
 #include <QtGui>
 #include <QtOpenGL>
 
-#include "circle.h"
 #include "glwidget.h"
 #include "square.h"
 #include "polygon.h"
@@ -175,18 +174,35 @@ void GLWidget::newSquare() {
 
 
 void GLWidget::newCircle() {
-  const int defaultRadius = 100;
+  /* Considering this was represented as a polygon, we re-use our
+   * polygon class rather than coming up with weird ways
+   * to check point membership in a circle-but-not-actually-a-circle.
+   */
 
-  //Create a new circle and make it a QSharedPointer
-  shape_ptr newCircle(new circle(width()/2, height()/2,
-                                 mShapeColour, mHighlightColour, defaultRadius));
+  QVector<QPoint> v;
 
-  //Add it to the list of shapes
-  mShapes.push_back(newCircle);
+  /* 1000 points around is good enough. */
+  const int coords = 1000;
+  const int radius = 100;
 
+  /* Got to make sure we render nicely in the middle. */
+  const int r = radius / 2;
+  const int w = width() / 4;
+  const int h = height() / 4;
+
+  for (int i = 0; i < coords; ++i) {
+
+    const int x = radius*qCos(2.0*i*M_PI/(double)coords);
+    const int y = radius*qSin(2.0*i*M_PI/(double)coords);
+
+    v << QPoint(x - r + w, y + h);
+  }
+
+  shape_ptr circlep(new polygon(mShapeColour, mHighlightColour, v));
+
+  mShapes.push_back(circlep);
   updateGL();
 }
-
 
 
 void GLWidget::newPolygon(QPolygon p) {
