@@ -2,10 +2,8 @@
 #include <QtOpenGL>
 
 #include "glwidget.h"
-#include "square.h"
 #include "polygon.h"
 
-#include <iostream>
 #include <stdlib.h>
 
 const double GLWidget::ZMin = -10.0;
@@ -142,7 +140,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event) {
 
     //Move the shape (note that "y" is different between
     //QT and openGL)
-    mSelectedShape->translateBy(mouseX - mClickLocationX,
+    mSelectedShape->translateBy(mouseX - mClickLocationX ,
                                 mClickLocationY - mouseY);
 
     //Update mouse click location
@@ -160,15 +158,22 @@ void GLWidget::clear() {
 }
 
 void GLWidget::newSquare() {
-  const int defaultSquareSize = 100;
+  /* Square is just a 4-sided polygon with 2 pairs of parallel sides. */
+  const int squareSize = 100;
+  const int hs = squareSize / 2;
 
-  //Create a new square and make it a QSharedPointer
-  shape_ptr newSquare(new square(width()/2, height()/2,
-                                 mShapeColour, mHighlightColour, defaultSquareSize));
+  const int w = width() / 4 + hs / 2;
+  const int h = height() / 4 + hs / 2;
 
-  //Add it to the list of shapes
-  mShapes.push_back(newSquare);
+  QVector<QPoint> v;
+  v << QPoint(-hs + w, -hs + h);
+  v << QPoint(hs + w ,  -hs + h);
+  v << QPoint(hs + w ,  hs + h);
+  v << QPoint(-hs + w, hs + h);
 
+  shape_ptr square(new polygon(mShapeColour, mHighlightColour, v));
+
+  mShapes.push_back(square);
   updateGL();
 }
 
@@ -198,9 +203,9 @@ void GLWidget::newCircle() {
     v << QPoint(x - r + w, y + h);
   }
 
-  shape_ptr circlep(new polygon(mShapeColour, mHighlightColour, v));
+  shape_ptr circle(new polygon(mShapeColour, mHighlightColour, v));
 
-  mShapes.push_back(circlep);
+  mShapes.push_back(circle);
   updateGL();
 }
 
