@@ -220,6 +220,7 @@
     <slot>newCircle()</slot>
     <slot>newPolygon(QPolygon)</slot>
     <slot>clearShapes()</slot>
+    <slot>redrawScene()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -417,6 +418,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addMatrixButton</sender>
+   <signal>clicked()</signal>
+   <receiver>mainForm</receiver>
+   <slot>addMatrixToShape()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>813</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deleteMatrixButton</sender>
+   <signal>clicked()</signal>
+   <receiver>mainForm</receiver>
+   <slot>removeMatrixFromShape()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>813</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>spawnPolygon(QPolygon)</signal>
@@ -448,5 +481,7 @@
   <slot>disableAddButton()</slot>
   <slot>populateMatrixList(shape*)</slot>
   <slot>clearMatrixList()</slot>
+  <slot>addMatrixToShape()</slot>
+  <slot>removeMatrixFromShape()</slot>
  </slots>
 </ui>

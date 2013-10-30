@@ -203,3 +203,7 @@ void GLWidget::clearShapes() {
   mShapes.clear();
   updateGL();
 }
+
+void GLWidget::redrawScene() {
+  updateGL();
+}
