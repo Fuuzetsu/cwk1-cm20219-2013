@@ -1,0 +1,53 @@
+Coursework by Mateusz Kowalczyk (mk440) for CM20219.
+
+To create the Makefile, run ‘qmake’. Then ‘make’ to compile and
+‘./qtgl1’ to run.
+
+
+I believe that I covered every aspect of specification except the 1
+mark requirement that would allow the user to change properties of the
+objects such as colour.
+
+The user is able to create arbitrary polygons. Drag and drop works
+(with small quirks for convex polygons where selection of the object
+might be a bit off – OpenGL doesn't support these anyway but I don't
+check for it) for all objects. I do no input validation for polygon
+creation. The format is pair of integers separated by a space. Pairs
+are separated by a semicolon. For example a square might be:
+0 0; 0 50; 50 50; 50 0;
+
+The integers represent co-ordinates, with the origin being in the
+lower left corner.
+
+Expect a segfault if the syntax is wrong. Polygons rendered off-screen
+are allowed. 1 or 2 sided ‘polygons’ also are allowed but of course
+won't be visible and the behaviour is undefined.
+
+You can create squares and circles using the provided spinners to set
+side lenght/radius. They spawn in the middle of current canvas.
+
+Matrix stack is implemented, for each object separately. You can add
+arbitrary amount of matrices. I provide the identity matrix already on
+the stack for format illustration purposes but it can be freely
+removed. I do no input validation for these matrices. A segfault is
+very likely if the format isn't correct here. The format are a triple
+of 3 floats separated by a space each, with each row separated by a
+semi-colon. So the identity matrix
+
+1 0 0
+0 1 0
+0 0 1
+
+should be input as
+1 0 0; 0 1 0; 0 0 1;
+
+You need to select a shape first: you can't do transformations on the
+whole scene. The add button adds the matrix to the top of the stack.
+The delete button pops it off. There's no way to re-orderer matrices
+but to delete and then re-add them in desired order. There's no way to
+delete a matrix that's not at the top of the stack (bottom of the list).
+
+You're almost guaranteed a segfault if this isn't correct.
+
+I provide some sample values in all text fields to provide formatting
+advice and easy way to just try it out.
