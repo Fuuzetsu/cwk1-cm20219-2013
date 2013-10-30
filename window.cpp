@@ -107,8 +107,35 @@ void Window::clearMatrixList() {
   currentShape = NULL;
 }
 
+
 void Window::addMatrixToShape() {
-  return;
+  if (!currentShape) {
+    std::cerr << "Tried to add a matrix without a selected shape."
+              << std::endl;
+  } else {
+
+    QString s = ui.newMatrixEdit->displayText();
+
+    QStringList list = s.split(";", QString::SkipEmptyParts).join(" ")
+      .split(" ", QString::SkipEmptyParts);
+
+    QList<qreal> l;
+    for (int i = 0; i < list.size(); ++i) {
+      l.push_back(list.at(i).toDouble());
+    }
+
+    QMatrix4x4 m(l.at(0), l.at(1), l.at(2), 0.0,
+                 l.at(3), l.at(4), l.at(2), 0.0,
+                 l.at(6), l.at(7), l.at(2), 0.0,
+                 0.0, 0.0, 0.0, 1.0);
+
+
+    QStack<QMatrix4x4> st = currentShape->getMatrixStack();
+    st.push(m);
+    currentShape->setMatrixStack(st);
+    populateMatrixList(currentShape);
+    emit matrixStackUpdated();
+  }
 }
 
 void Window::removeMatrixFromShape() {
