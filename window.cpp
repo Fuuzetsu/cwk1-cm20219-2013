@@ -71,7 +71,9 @@ void Window::enableAddButton() {
 
 void Window::populateMatrixList(shape *s) {
   /* Clear the list before populating it again */
-  ui.matrixList->clear();
+  clearMatrixList();
+
+  currentShape = s;
 
   QStack<QMatrix4x4> st = s->getMatrixStack();
 
@@ -102,4 +104,28 @@ void Window::clearMatrixList() {
    */
   disableAddButton();
   disableDeleteButton();
+  currentShape = NULL;
+}
+
+void Window::addMatrixToShape() {
+  return;
+}
+
+void Window::removeMatrixFromShape() {
+  if (!currentShape) {
+    std::cerr << "Tried to remove a matrix without a selected shape."
+              << std::endl;
+  } else if (currentShape->getMatrixStack().empty()) {
+    std::cerr << "Tried to remove a matrix from an empty stack."
+              << std::endl;
+  } else {
+    /* We just throw-away the last element, repopulate list and redraw scene */
+    QStack<QMatrix4x4> s = currentShape->getMatrixStack();
+    s.pop();
+    currentShape->setMatrixStack(s);
+    populateMatrixList(currentShape);
+    emit matrixStackUpdated();
+  }
+
+
 }

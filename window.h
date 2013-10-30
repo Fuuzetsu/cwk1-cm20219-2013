@@ -17,14 +17,12 @@ class Window : public QDialog {
   Q_OBJECT;
 
  public:
-  //Constructor
   Window(QWidget *parent = 0);
 
  private:
-  //GLWidget instance---by storing an instance, the widget is automatically created
-  //and cleared up when the Window class is instantiated (i.e. no need for new/delete)
   GLWidget mGLWidget;
   Ui::mainForm ui;
+  shape *currentShape;
 
  private slots:
    void aboutBut();
@@ -44,6 +42,7 @@ class Window : public QDialog {
 
  signals:
    void spawnPolygon(QPolygon p);
+   void matrixStackUpdated();
 
 };
 

@@ -450,9 +450,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>mainForm</sender>
+   <signal>matrixStackUpdated()</signal>
+   <receiver>drawingCanvas</receiver>
+   <slot>redrawScene()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>spawnPolygon(QPolygon)</signal>
+  <signal>matrixStackUpdated()</signal>
   <slot>colourHex()</slot>
   <slot>colourSnake()</slot>
   <slot>showHex(bool)</slot>
