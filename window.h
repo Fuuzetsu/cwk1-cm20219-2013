@@ -40,10 +40,12 @@ class Window : public QDialog {
    void addMatrixToShape();
    void removeMatrixFromShape();
    void makeCircle();
+   void makeSquare();
 
  signals:
    void spawnPolygon(QPolygon p);
    void spawnCircle(int radius);
+   void spawnSquare(int side);
    void matrixStackUpdated();
 
 };

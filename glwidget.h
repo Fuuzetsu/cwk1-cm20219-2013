@@ -57,7 +57,7 @@ class GLWidget : public QGLWidget {
  public slots:
   void clear();
   void newCircle(int radius);
-  void newSquare();
+  void newSquare(int side);
   void newPolygon(QPolygon p);
   void clearShapes();
   void redrawScene();

@@ -158,3 +158,7 @@ void Window::removeMatrixFromShape() {
 void Window::makeCircle() {
   emit spawnCircle(ui.circleSpinBox->value());
 }
+
+void Window::makeSquare() {
+  emit spawnSquare(ui.squareSpinBox->value());
+}

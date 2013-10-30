@@ -157,10 +157,9 @@ void GLWidget::clear() {
   updateGL();
 }
 
-void GLWidget::newSquare() {
+void GLWidget::newSquare(int side) {
   /* Square is just a 4-sided polygon with 2 pairs of parallel sides. */
-  const int squareSize = 100;
-  const int hs = squareSize / 2;
+  const int hs = side / 2;
 
   const int w = width() / 4 + hs / 2;
   const int h = height() / 4 + hs / 2;

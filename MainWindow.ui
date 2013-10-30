@@ -51,6 +51,33 @@
          </widget>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Side length</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="squareSpinBox">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+            <property name="singleStep">
+             <number>10</number>
+            </property>
+            <property name="value">
+             <number>40</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <widget class="QPushButton" name="newCirclePushButton">
           <property name="text">
            <string>New Circle</string>
@@ -94,7 +121,7 @@
         <item>
          <widget class="QLineEdit" name="polygonEdit">
           <property name="text">
-           <string>0 0; 100 100; 100 200;</string>
+           <string>50 50; 100 100; 100 200;</string>
           </property>
          </widget>
         </item>
@@ -247,7 +274,7 @@
     <signal>shapesDrawn(int)</signal>
     <signal>shapeSelected(shape*)</signal>
     <signal>shapeDeselected()</signal>
-    <slot>newSquare()</slot>
+    <slot>newSquare(int)</slot>
     <slot>newCircle(int)</slot>
     <slot>newPolygon(QPolygon)</slot>
     <slot>clearShapes()</slot>
@@ -292,16 +319,16 @@
   <connection>
    <sender>newSquarePushButton</sender>
    <signal>clicked()</signal>
-   <receiver>drawingCanvas</receiver>
-   <slot>newSquare()</slot>
+   <receiver>mainForm</receiver>
+   <slot>makeSquare()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>174</x>
      <y>27</y>
     </hint>
     <hint type="destinationlabel">
-     <x>202</x>
-     <y>30</y>
+     <x>396</x>
+     <y>423</y>
     </hint>
    </hints>
   </connection>
@@ -529,11 +556,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>mainForm</sender>
+   <signal>spawnSquare(int)</signal>
+   <receiver>drawingCanvas</receiver>
+   <slot>newSquare(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>spawnPolygon(QPolygon)</signal>
   <signal>matrixStackUpdated()</signal>
   <signal>spawnCircle(int)</signal>
+  <signal>spawnSquare(int)</signal>
   <slot>colourHex()</slot>
   <slot>colourSnake()</slot>
   <slot>showHex(bool)</slot>
@@ -565,5 +609,6 @@
   <slot>addMatrixToShape()</slot>
   <slot>removeMatrixFromShape()</slot>
   <slot>makeCircle()</slot>
+  <slot>makeSquare()</slot>
  </slots>
 </ui>
