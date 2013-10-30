@@ -84,8 +84,7 @@ void Window::populateMatrixList(shape *s) {
     QString str;
     for (int r = 0; r < 4; ++r) {
       QVector4D v = m.row(r);
-      str = str + QString("%1 %2 %3 %4; ").arg(v.x()).arg(v.y())
-        .arg(v.z()).arg(v.w());
+      str = str + QString("%1 %2 %3; ").arg(v.x()).arg(v.y()).arg(v.z());
     }
     ui.matrixList->addItem(str);
   }
