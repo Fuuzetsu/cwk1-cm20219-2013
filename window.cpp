@@ -34,7 +34,7 @@ void Window::aboutBut() {
 
 void Window::createPolygon() {
   QString s = ui.polygonEdit->displayText();
-  QRegExp r("(\\d+\\s\\d+);+");
+  QRegExp r("(\\d+\\s\\d+;)+");
   QStringList list;
   int pos = 0;
 
@@ -42,6 +42,7 @@ void Window::createPolygon() {
     list << r.cap(1);
     pos += r.matchedLength();
   }
+  list = list.replaceInStrings(";", "");
 
   QPolygon p;
 
