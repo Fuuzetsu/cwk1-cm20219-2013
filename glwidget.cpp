@@ -178,7 +178,7 @@ void GLWidget::newSquare() {
 }
 
 
-void GLWidget::newCircle() {
+void GLWidget::newCircle(const int radius) {
   /* Considering this was represented as a polygon, we re-use our
    * polygon class rather than coming up with weird ways
    * to check point membership in a circle-but-not-actually-a-circle.
@@ -188,7 +188,6 @@ void GLWidget::newCircle() {
 
   /* 1000 points around is good enough. */
   const int coords = 1000;
-  const int radius = 100;
 
   /* Got to make sure we render nicely in the middle. */
   const int r = radius / 2;

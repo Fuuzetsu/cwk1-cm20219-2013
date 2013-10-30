@@ -153,6 +153,8 @@ void Window::removeMatrixFromShape() {
     populateMatrixList(currentShape);
     emit matrixStackUpdated();
   }
+}
 
-
+void Window::makeCircle() {
+  emit spawnCircle(ui.circleSpinBox->value());
 }

@@ -58,6 +58,33 @@
          </widget>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Radius</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="circleSpinBox">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>10</number>
+            </property>
+            <property name="value">
+             <number>80</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <widget class="QPushButton" name="newPolygonPushButton">
           <property name="text">
            <string>New Polygon</string>
@@ -221,7 +248,7 @@
     <signal>shapeSelected(shape*)</signal>
     <signal>shapeDeselected()</signal>
     <slot>newSquare()</slot>
-    <slot>newCircle()</slot>
+    <slot>newCircle(int)</slot>
     <slot>newPolygon(QPolygon)</slot>
     <slot>clearShapes()</slot>
     <slot>redrawScene()</slot>
@@ -275,22 +302,6 @@
     <hint type="destinationlabel">
      <x>202</x>
      <y>30</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>newCirclePushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>drawingCanvas</receiver>
-   <slot>newCircle()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>161</x>
-     <y>59</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>229</x>
-     <y>55</y>
     </hint>
    </hints>
   </connection>
@@ -486,10 +497,43 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>mainForm</sender>
+   <signal>spawnCircle(int)</signal>
+   <receiver>drawingCanvas</receiver>
+   <slot>newCircle(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>newCirclePushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>mainForm</receiver>
+   <slot>makeCircle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>148</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>spawnPolygon(QPolygon)</signal>
   <signal>matrixStackUpdated()</signal>
+  <signal>spawnCircle(int)</signal>
   <slot>colourHex()</slot>
   <slot>colourSnake()</slot>
   <slot>showHex(bool)</slot>
@@ -520,5 +564,6 @@
   <slot>clearMatrixList()</slot>
   <slot>addMatrixToShape()</slot>
   <slot>removeMatrixFromShape()</slot>
+  <slot>makeCircle()</slot>
  </slots>
 </ui>

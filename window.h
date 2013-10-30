@@ -39,9 +39,11 @@ class Window : public QDialog {
    void clearMatrixList();
    void addMatrixToShape();
    void removeMatrixFromShape();
+   void makeCircle();
 
  signals:
    void spawnPolygon(QPolygon p);
+   void spawnCircle(int radius);
    void matrixStackUpdated();
 
 };
